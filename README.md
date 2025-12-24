@@ -11,6 +11,7 @@ A comprehensive portfolio optimization solution using both **Classical** (Simula
 1. [Problem Statement](#problem-statement)
 2. [Mathematical Background](#mathematical-background)
 3. [Data Preparation](#data-preparation)
+   - [Covariance Matrix Estimation](#covariance-matrix-estimation)
 4. [Solution Approach](#solution-approach)
 5. [Classical Solution](#classical-solution)
 6. [Quantum Solution](#quantum-solution)
@@ -237,6 +238,136 @@ Total assets: 50
 Currently holding: 36 assets
 Sectors: ['CONS', 'ENERGY', 'FIN', 'HEALTH', 'TECH']
 ```
+
+### Covariance Matrix Estimation
+
+The original dataset did not include historical price data or a pre-computed covariance matrix. We derived the covariance matrix using market capitalization data and sector information through a three-step process.
+
+#### Step 1: Volatility Estimation from Market Cap
+
+There is a well-documented empirical relationship in finance: **smaller companies tend to have higher volatility** than larger companies. This is because:
+- Smaller companies are more sensitive to market shocks
+- They often have less diversified revenue streams
+- Their stocks typically have lower liquidity
+
+We used this relationship to estimate volatility from market cap:
+
+```python
+# Normalize market caps using log transformation
+log_caps = np.log(market_caps + 1)
+normalized_caps = (log_caps - log_caps.min()) / (log_caps.max() - log_caps.min())
+
+# Map to volatility range (inverse relationship)
+base_volatility = 0.20    # 20% for largest companies
+volatility_range = 0.40   # Additional 40% for smallest companies
+
+volatilities = base_volatility + volatility_range * (1 - normalized_caps)
+```
+
+**Result:**
+- Largest market cap → ~20% annual volatility (lower risk)
+- Smallest market cap → ~60% annual volatility (higher risk)
+
+| Market Cap Rank | Volatility (σ) |
+|-----------------|----------------|
+| Top 10 | 20-25% |
+| Middle | 35-45% |
+| Bottom 10 | 50-60% |
+
+#### Step 2: Correlation Matrix Construction
+
+We built the correlation matrix based on sector membership, using the well-known principle that **assets in the same sector tend to move together**:
+
+```python
+correlation_matrix = np.zeros((n_assets, n_assets))
+
+for i in range(n_assets):
+    for j in range(n_assets):
+        if i == j:
+            correlation_matrix[i, j] = 1.0              # Self-correlation
+        elif sectors[i] == sectors[j]:
+            correlation_matrix[i, j] = 0.60             # Same sector
+        else:
+            correlation_matrix[i, j] = 0.20             # Different sectors
+```
+
+**Correlation Values:**
+
+| Relationship | Correlation (ρ) | Rationale |
+|--------------|-----------------|-----------|
+| Same asset | 1.00 | Perfect correlation with itself |
+| Same sector | 0.60 | Assets in same industry move together |
+| Different sector | 0.20 | General market correlation |
+
+**Sector Distribution:**
+
+| Sector | Count | Assets |
+|--------|-------|--------|
+| ENERGY | 13 | Assets 3, 6, 7, 9, 10, ... |
+| CONS | 10 | Assets 0, 17, 22, 30, ... |
+| HEALTH | 10 | Assets 4, 5, 8, 24, ... |
+| FIN | 10 | Assets 1, 25, 33, 39, ... |
+| TECH | 7 | Assets 2, 18, 38, 41, ... |
+
+#### Step 3: Covariance Matrix Calculation
+
+The covariance matrix is computed from volatilities and correlations:
+
+```
+Covariance(i, j) = ρᵢⱼ × σᵢ × σⱼ
+
+Where:
+- ρᵢⱼ = correlation between assets i and j
+- σᵢ  = volatility (standard deviation) of asset i
+- σⱼ  = volatility (standard deviation) of asset j
+```
+
+**Special case (diagonal elements = variance):**
+```
+Variance(i) = σᵢ × σᵢ = σᵢ²
+```
+
+**In Python:**
+```python
+covariance_matrix = np.zeros((n_assets, n_assets))
+
+for i in range(n_assets):
+    for j in range(n_assets):
+        covariance_matrix[i, j] = (
+            correlation_matrix[i, j] * 
+            volatilities[i] * 
+            volatilities[j]
+        )
+```
+
+#### Validation
+
+The resulting covariance matrix was validated for correctness:
+
+| Property | Expected | Achieved |
+|----------|----------|----------|
+| Symmetric | Σᵢⱼ = Σⱼᵢ | ✅ |
+| Positive Semi-Definite | All eigenvalues ≥ 0 | ✅ |
+| Diagonal = Variance | Σᵢᵢ = σᵢ² | ✅ |
+| Shape | (50, 50) | ✅ |
+
+**Matrix Statistics:**
+```
+Variance range:  0.0400 (4%) to 0.3600 (36%)
+Covariance range: 0.0080 to 0.2160
+All eigenvalues: positive (matrix is valid)
+```
+
+#### Why This Approach?
+
+This estimation method is reasonable because:
+
+1. **Market cap → Volatility** is a well-established empirical relationship (Fama-French research)
+2. **Sector-based correlation** captures real market dynamics where industry peers move together
+3. **The matrix is mathematically valid** (positive semi-definite) for optimization
+4. **Values are realistic** - volatilities and correlations fall within typical market ranges
+
+In production, you would use historical returns data to compute the actual covariance matrix. Our estimation provides a reasonable approximation for the hackathon dataset.
 
 ---
 
@@ -539,7 +670,8 @@ Maximizing return is not enough. We need to maximize **risk-adjusted** return.
 
 Gabriel Justina Ayomide
 
-Africa Quantum Computing Hackathon 2025
+Africa Quantum Computing Hackathon 2024
 
----
+
+
 
