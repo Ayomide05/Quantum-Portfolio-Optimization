@@ -1,0 +1,193 @@
+{
+  "method": "Classical - Simulated Annealing with Multi-Period Rebalancing",
+  "parameters": {
+    "N": 15,
+    "K": 5,
+    "S_max": 5,
+    "lambda_risk": 0.5,
+    "tau": 0.1
+  },
+  "selected_assets": [
+    2,
+    13,
+    16,
+    17,
+    18,
+    19,
+    21,
+    32,
+    34,
+    36,
+    37,
+    39,
+    42,
+    43,
+    47
+  ],
+  "transactions": {
+    "hold": [
+      2,
+      13,
+      16,
+      17,
+      18,
+      21,
+      34,
+      36,
+      37,
+      47
+    ],
+    "buy": [
+      19,
+      32,
+      39,
+      42,
+      43
+    ],
+    "sell": [
+      0,
+      1,
+      4,
+      5,
+      6,
+      8,
+      11,
+      12,
+      14,
+      15,
+      20,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      35,
+      40,
+      44,
+      45,
+      48,
+      49
+    ]
+  },
+  "transition_plan": {
+    "weeks_needed": 7,
+    "weekly_details": [
+      {
+        "week": 1,
+        "sell": [
+          44,
+          30,
+          24,
+          8,
+          5
+        ],
+        "buy": [],
+        "changes": 5,
+        "cost": 0.11689988353
+      },
+      {
+        "week": 2,
+        "sell": [
+          1,
+          48,
+          26,
+          31,
+          27
+        ],
+        "buy": [],
+        "changes": 5,
+        "cost": 0.13003307041
+      },
+      {
+        "week": 3,
+        "sell": [
+          4,
+          29,
+          40,
+          12,
+          15
+        ],
+        "buy": [],
+        "changes": 5,
+        "cost": 0.17715876093
+      },
+      {
+        "week": 4,
+        "sell": [
+          28,
+          11,
+          23,
+          35,
+          20
+        ],
+        "buy": [],
+        "changes": 5,
+        "cost": 0.11902768711
+      },
+      {
+        "week": 5,
+        "sell": [
+          6,
+          45,
+          14,
+          25,
+          0
+        ],
+        "buy": [],
+        "changes": 5,
+        "cost": 0.14660913662
+      },
+      {
+        "week": 6,
+        "sell": [
+          49
+        ],
+        "buy": [
+          19,
+          43,
+          42,
+          39
+        ],
+        "changes": 5,
+        "cost": 0.19092026139
+      },
+      {
+        "week": 7,
+        "sell": [],
+        "buy": [
+          32
+        ],
+        "changes": 1,
+        "cost": 0.03667466642
+      }
+    ]
+  },
+  "metrics_equal_weights": {
+    "expected_return": 0.6969407819733334,
+    "risk": 0.23901127761414914,
+    "sharpe_ratio": 2.8322545644317296
+  },
+  "metrics_optimized": {
+    "expected_return": 1.0196259966097696,
+    "risk": 0.20638436467455973,
+    "sharpe_ratio": 4.843516117056856
+  },
+  "total_transaction_cost": 0.9173234664099998,
+  "sector_breakdown": {
+    "HEALTH": 3,
+    "FIN": 3,
+    "CONS": 4,
+    "TECH": 1,
+    "ENERGY": 4
+  },
+  "constraints_satisfied": {
+    "portfolio_size": true,
+    "sector_limit": true,
+    "weekly_change_limit": true
+  },
+  "computation_time": 1.3960685729980469
+}

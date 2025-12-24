@@ -1,0 +1,15 @@
+{
+  "N": 15,
+  "K": 5,
+  "S_max": 0.35,
+  "lambda_risk": 0.5,
+  "n_assets": 50,
+  "sectors": [
+    "ENERGY",
+    "CONS",
+    "HEALTH",
+    "FIN",
+    "TECH"
+  ],
+  "current_holdings": 36
+}
