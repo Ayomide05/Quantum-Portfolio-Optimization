@@ -1,15 +1,21 @@
 import numpy as np
 import json
 import time
+import os
 from scipy.optimize import minimize
 
 
-returns = np.load('expected_returns.npy')
-cov_matrix= np.load('covariance_matrix.npy')
-prev_positions = np.load('previous_positions.npy')
-trans_costs = np.load('transaction_costs.npy')
-volatilities = np.load('volatilities.npy')
-sectors = np.load('sector_list.npy', allow_pickle=True)
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+data_dir = os.path.join(base_dir, 'data')
+
+# Load all data files
+returns = np.load(os.path.join(data_dir, 'expected_returns.npy'))
+cov_matrix = np.load(os.path.join(data_dir, 'covariance_matrix.npy'))
+prev_positions = np.load(os.path.join(data_dir, 'previous_positions.npy'))
+trans_costs = np.load(os.path.join(data_dir, 'transaction_costs.npy'))
+volatilities = np.load(os.path.join(data_dir, 'volatilities.npy'))
+sectors = np.load(os.path.join(data_dir, 'sector_list.npy'), allow_pickle=True)
+
 
 n_assets = len(returns)
 unique_sectors = np.unique(sectors)
