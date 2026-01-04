@@ -1,0 +1,16 @@
+QUANTUM PORTFOLIO OPTIMIZATION RESULTS
+==================================================
+
+Selected Assets: [2, 17, 18, 19, 21, 25, 32, 35, 36, 39, 40, 42, 43, 47, 48]
+Portfolio Size: 15
+
+Expected Return: 101.33%
+Risk (Volatility): 20.50%
+Sharpe Ratio: 4.8451
+
+Transaction Cost: 0.9109
+Weeks Needed: 7
+
+Innovations:
+  - Hybrid Warm Start: 6 methods, Best: Favor Holdings
+  - Rebalancing Trigger: 0 triggers in 30-day simulation
