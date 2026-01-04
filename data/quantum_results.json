@@ -1,0 +1,205 @@
+{
+  "method": "Quantum Annealing",
+  "algorithm": "Quantum Annealing (Ising Hamiltonian)",
+  "description": "Direct quantum analog of classical Simulated Annealing",
+  "parameters": {
+    "N": 15,
+    "K": 5,
+    "S_max": 5,
+    "lambda_risk": 0.5,
+    "tau": 0.1,
+    "n_reads": 2000,
+    "annealing_time": 200,
+    "problem_size_qubits": 50
+  },
+  "selected_assets": [
+    0,
+    2,
+    9,
+    13,
+    17,
+    18,
+    19,
+    21,
+    25,
+    29,
+    30,
+    39,
+    40,
+    42,
+    47
+  ],
+  "transactions": {
+    "hold": [
+      0,
+      2,
+      13,
+      17,
+      18,
+      21,
+      25,
+      29,
+      30,
+      40,
+      47
+    ],
+    "buy": [
+      9,
+      19,
+      39,
+      42
+    ],
+    "sell": [
+      1,
+      4,
+      5,
+      6,
+      8,
+      11,
+      12,
+      14,
+      15,
+      16,
+      20,
+      23,
+      24,
+      26,
+      27,
+      28,
+      31,
+      34,
+      35,
+      36,
+      37,
+      44,
+      45,
+      48,
+      49
+    ],
+    "total_changes": 29
+  },
+  "transition_plan": {
+    "weeks_needed": 6,
+    "max_changes_per_week": 5,
+    "weekly_details": [
+      {
+        "week": 1,
+        "sell": [
+          44,
+          24,
+          8,
+          5,
+          1
+        ],
+        "buy": [],
+        "cost": 0.13342906205
+      },
+      {
+        "week": 2,
+        "sell": [
+          48,
+          16,
+          26,
+          31,
+          27
+        ],
+        "buy": [],
+        "cost": 0.13931009287
+      },
+      {
+        "week": 3,
+        "sell": [
+          4,
+          12,
+          15,
+          28,
+          11
+        ],
+        "buy": [],
+        "cost": 0.16127007658
+      },
+      {
+        "week": 4,
+        "sell": [
+          23,
+          35,
+          37,
+          20,
+          6
+        ],
+        "buy": [],
+        "cost": 0.13111749042999998
+      },
+      {
+        "week": 5,
+        "sell": [
+          45,
+          36,
+          14,
+          34,
+          49
+        ],
+        "buy": [],
+        "cost": 0.14843734279999998
+      },
+      {
+        "week": 6,
+        "sell": [],
+        "buy": [
+          19,
+          42,
+          39,
+          9
+        ],
+        "cost": 0.17891577516
+      }
+    ]
+  },
+  "metrics_equal_weights": {
+    "expected_return": 0.5704314983779999,
+    "risk": 0.23535626363463227,
+    "sharpe_ratio": 2.3387161653470643
+  },
+  "metrics_optimized": {
+    "expected_return": 1.0133094770766569,
+    "risk": 0.20501241383725685,
+    "sharpe_ratio": 4.845118685667331
+  },
+  "optimal_weights": {
+    "asset_0": 0.0,
+    "asset_2": 1.5074305755355743e-14,
+    "asset_9": 0.0,
+    "asset_13": 6.889118353609117e-15,
+    "asset_17": 0.32585123198281873,
+    "asset_18": 0.1519566622424414,
+    "asset_19": 0.3488583948286905,
+    "asset_21": 0.0,
+    "asset_25": 0.019239301962223874,
+    "asset_29": 0.0,
+    "asset_30": 0.0,
+    "asset_39": 0.15409440898392618,
+    "asset_40": 0.0,
+    "asset_42": 0.0,
+    "asset_47": 1.5956846783220176e-14
+  },
+  "total_transaction_cost": 0.8924798398899999,
+  "sector_breakdown": {
+    "ENERGY": 5,
+    "HEALTH": 3,
+    "CONS": 4,
+    "FIN": 2,
+    "TECH": 1
+  },
+  "constraints_satisfied": {
+    "portfolio_size": true,
+    "sector_limit": true,
+    "weekly_change_limit": true
+  },
+  "quantum_metrics": {
+    "best_energy": -116959.64086502517,
+    "n_reads": 2000,
+    "mean_energy": -119941.41598197263,
+    "std_energy": 195.65689421907004
+  },
+  "computation_time": 8.243792057037354
+}
