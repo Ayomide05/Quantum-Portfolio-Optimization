@@ -932,9 +932,14 @@ print("═" * 60)
 # Save files
 output_dir = os.path.dirname(os.path.abspath(__file__))
 
+data_dir = os.path.join(os.path.dirname(output_dir), 'data')
+
+#Ensure the folder exists (just in case)
+os.makedirs(data_dir, exist_ok=True)
+
 # Save numpy arrays (these always work)
-np.save(os.path.join(output_dir, 'quantum_selected.npy'), np.array(optimal_portfolio))
-np.save(os.path.join(output_dir, 'quantum_weights.npy'), optimal_weights)
+np.save(os.path.join(data_dir, 'quantum_selected.npy'), np.array(optimal_portfolio))
+np.save(os.path.join(data_dir, 'quantum_weights.npy'), optimal_weights)
 
 # Save results as simple text file instead of JSON
 with open(os.path.join(output_dir, 'quantum_results.txt'), 'w') as f:
