@@ -111,6 +111,7 @@ We employed a **Two-Stage Optimization** strategy:
 ---
 
 ## 🚀 Innovations (Key Differentiators)
+![Innovation Summary](figures/innovation_summary.png)
 
 ### Innovation 1: Hybrid Quantum-Classical Warm Start
 Instead of starting the quantum annealing process from random noise, we injected "intelligent guesses" based on classical heuristics.
@@ -134,12 +135,20 @@ $$d(w, w^*) = \sqrt{(w - w^*)^T \Sigma^{-1} (w - w^*)}$$
 ---
 
 ## 📊 Results & Comparison
+![Performance Comparison](figures/performance_comparison.png)
 
 | Metric | Classical SA | Quantum QA | Improvement |
 | :--- | :--- | :--- | :--- |
 | **Expected Return** | 69.69% | **101.33%** | 🔼 **+31.64%** |
 | **Portfolio Risk** | 23.90% | **20.50%** | 🔽 **-3.40%** |
 | **Sharpe Ratio** | 2.83 | **4.85** | 🚀 **+71.4%** |
+
+### Visual Analysis
+**Risk-Return Landscape:**
+![Efficient Frontier](figures/risk_return_scatter.png)
+
+**Sector Diversification:**
+![Sector Allocation](figures/sector_allocation.png)
 
 ### Quantum Portfolio Allocation
 * **Selected Assets:** `[2, 17, 18, 19, 21, 25, 32, 35, 36, 39, 40, 42, 43, 47, 48]`
