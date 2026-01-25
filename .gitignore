@@ -1,0 +1,11 @@
+# Virtual Environments
+quantum_env/
+.venv/
+env/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# IDE settings
+.vscode/
